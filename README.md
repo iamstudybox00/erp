@@ -52,7 +52,7 @@ Spring Boot 기반으로 REST API를 제공하며, React 프론트엔드와 연�
 ## 📂 프로젝트 구성  
 
 <details>
-<summary>전체 ERD 보기</summary>  
+<summary>전표 기능 ERD</summary>  
 
 ![전표기능 ERD](./images/transaction_erd.png)
 

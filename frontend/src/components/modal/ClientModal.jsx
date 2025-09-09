@@ -94,7 +94,7 @@ function ClientModal(props) {
     let response = [];
     if (prevSearch.searchWord !== "") {
       // 다른 검색을 하였을때 
-      if ((prevSearch.searchField !== formData.searchField || prevSearch.searchWord !== formData.searchWord)  && searchChange) {
+      if ((prevSearch.searchField !== formData.searchField || prevSearch.searchWord !== formData.searchWord) && searchChange) {
         response = await axios.get(props.baseUrl + "/clients/" + formData.searchField + "/" + formData.searchWord + "/page/" + page + "/" + size);
       } else {
         response = await axios.get(props.baseUrl + "/clients/" + prevSearch.searchField + "/" + prevSearch.searchWord + "/page/" + page + "/" + size);
@@ -122,14 +122,18 @@ function ClientModal(props) {
                 <option value="companyName">상호</option>
                 <option value="clientPicName">담당자명</option>
               </Form.Control>
-              <Form.Control className="w-25" type="text" name="searchWord" id="searchWord" placeholder="입력..." required onChange={formDataHandler} />
+              <Form.Control className="w-25" type="text" name="searchWord" id="searchWord" placeholder="입력..." value={formData.searchWord} required onChange={formDataHandler} />
               <Button className="basic-button" type="submit">검색</Button>
               <Button className="basic-button mx-3" onClick={(e) => {
                 e.preventDefault();
                 setPrevSearch({
                   searchField: "companyName",
                   searchWord: ""
-                })
+                });
+                setFormData({
+                  searchField: "companyName",
+                  searchWord: ""
+                });
                 getData();
               }}> 검색 초기화</Button>
             </InputGroup>
@@ -137,6 +141,10 @@ function ClientModal(props) {
           <div>
             <Button className="basic-button" onClick={() => {
               setPrevSearch({
+                searchField: "companyName",
+                searchWord: ""
+              });
+              setFormData({
                 searchField: "companyName",
                 searchWord: ""
               });
@@ -165,6 +173,10 @@ function ClientModal(props) {
         <div>
           <Button className="basic-button mt-3" onClick={() => {
             setPrevSearch({
+              searchField: "companyName",
+              searchWord: ""
+            });
+            setFormData({
               searchField: "companyName",
               searchWord: ""
             });

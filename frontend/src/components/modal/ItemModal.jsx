@@ -90,7 +90,7 @@ function ItemModal(props) {
     let response = [];
     if (prevSearch.searchWord !== "") {
       // 다른 검색을 하였을때 
-      if ((prevSearch.searchField !== formData.searchField || prevSearch.searchWord !== formData.searchWord)  && searchChange) {
+      if ((prevSearch.searchField !== formData.searchField || prevSearch.searchWord !== formData.searchWord) && searchChange) {
         response = await axios.get(props.baseUrl + "/items/" + formData.searchField + "/" + formData.searchWord + "/page/" + page + "/" + size);
       } else {
         response = await axios.get(props.baseUrl + "/items/" + prevSearch.searchField + "/" + prevSearch.searchWord + "/page/" + page + "/" + size);
@@ -118,14 +118,18 @@ function ItemModal(props) {
                 <option value="itemName">제품명</option>
                 <option value="itemCode">코드</option>
               </Form.Control>
-              <Form.Control className="w-25" type="text" name="searchWord" id="searchWord" placeholder="입력..." required onChange={formDataHandler} />
+              <Form.Control className="w-25" type="text" name="searchWord" id="searchWord" value={formData.searchWord} placeholder="입력..." required onChange={formDataHandler} />
               <Button className="basic-button" type="submit">검색</Button>
               <Button className="basic-button mx-3" onClick={(e) => {
                 e.preventDefault();
                 setPrevSearch({
                   searchField: "itemName",
                   searchWord: ""
-                })
+                });
+                setFormData({
+                  searchField: "itemName",
+                  searchWord: ""
+                });
                 getData();
               }}> 검색 초기화</Button>
             </InputGroup>
@@ -133,6 +137,10 @@ function ItemModal(props) {
           <div>
             <Button className="basic-button" onClick={() => {
               setPrevSearch({
+                searchField: "itemName",
+                searchWord: ""
+              });
+              setFormData({
                 searchField: "itemName",
                 searchWord: ""
               });
@@ -160,6 +168,10 @@ function ItemModal(props) {
         <div>
           <Button className="basic-button mt-3" onClick={() => {
             setPrevSearch({
+              searchField: "itemName",
+              searchWord: ""
+            });
+            setFormData({
               searchField: "itemName",
               searchWord: ""
             });

@@ -21,7 +21,7 @@ function AccountSubjectModal(props) {
   const blockSize = 3;
   const [isEndLoading, setIsEndLoading] = useState(false);
   let searchChange = false;
-  
+
 
   const setModalData = (key, value) => {
     props.selectData((prev) => ({
@@ -114,14 +114,18 @@ function AccountSubjectModal(props) {
               <Form.Control as="select" name="searchField" id="searchField" defaultValue={"accountSubjectName"} required onChange={formDataHandler}>
                 <option value="accountSubjectName">과목명</option>
               </Form.Control>
-              <Form.Control className="w-25" type="text" name="searchWord" id="searchWord" placeholder="입력..." required onChange={formDataHandler} />
+              <Form.Control className="w-25" type="text" name="searchWord" id="searchWord" value={formData.searchWord} placeholder="입력..." required onChange={formDataHandler} />
               <Button className="basic-button" type="submit">검색</Button>
               <Button className="basic-button mx-3" onClick={(e) => {
                 e.preventDefault();
                 setPrevSearch({
                   searchField: "accountSubjectName",
                   searchWord: ""
-                })
+                });
+                setFormData({
+                  searchField: "accountSubjectName",
+                  searchWord: ""
+                });
                 getData();
               }}> 검색 초기화</Button>
             </InputGroup>
@@ -129,6 +133,10 @@ function AccountSubjectModal(props) {
           <div>
             <Button className="basic-button" onClick={() => {
               setPrevSearch({
+                searchField: "accountSubjectName",
+                searchWord: ""
+              });
+              setFormData({
                 searchField: "accountSubjectName",
                 searchWord: ""
               });
@@ -154,6 +162,10 @@ function AccountSubjectModal(props) {
         <div>
           <Button className="basic-button mt-3" onClick={() => {
             setPrevSearch({
+              searchField: "accountSubjectName",
+              searchWord: ""
+            });
+            setFormData({
               searchField: "accountSubjectName",
               searchWord: ""
             });

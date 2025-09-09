@@ -95,7 +95,7 @@ function EmpModal(props) {
     let response = [];
     if (prevSearch.searchWord !== "") {
       // 다른 검색을 하였을때 
-      if ((prevSearch.searchField !== formData.searchField || prevSearch.searchWord !== formData.searchWord)  && searchChange) {
+      if ((prevSearch.searchField !== formData.searchField || prevSearch.searchWord !== formData.searchWord) && searchChange) {
         response = await axios.get(props.baseUrl + "/employees/" + formData.searchField + "/" + formData.searchWord + "/page/" + page + "/" + size);
       } else {
         response = await axios.get(props.baseUrl + "/employees/" + prevSearch.searchField + "/" + prevSearch.searchWord + "/page/" + page + "/" + size);
@@ -123,14 +123,18 @@ function EmpModal(props) {
                 <option value="empName">이름</option>
                 <option value="empId">아이디</option>
               </Form.Control>
-              <Form.Control className="w-25" type="text" name="searchWord" id="searchWord" placeholder="입력..." onChange={formDataHandler} />
+              <Form.Control className="w-25" type="text" name="searchWord" id="searchWord" value={formData.searchWord} placeholder="입력..." onChange={formDataHandler} />
               <Button className="basic-button" type="submit">검색</Button>
               <Button className="basic-button mx-3" onClick={(e) => {
                 e.preventDefault();
                 setPrevSearch({
                   searchField: "empName",
                   searchWord: ""
-                })
+                });
+                setFormData({
+                  searchField: "empName",
+                  searchWord: ""
+                });
                 getData();
               }}> 검색 초기화</Button>
             </InputGroup>
@@ -138,6 +142,10 @@ function EmpModal(props) {
           <div>
             <Button className="basic-button" onClick={() => {
               setPrevSearch({
+                searchField: "empName",
+                searchWord: ""
+              });
+              setFormData({
                 searchField: "empName",
                 searchWord: ""
               });
@@ -165,6 +173,10 @@ function EmpModal(props) {
         <div>
           <Button className="basic-button mt-3" onClick={() => {
             setPrevSearch({
+              searchField: "empName",
+              searchWord: ""
+            });
+            setFormData({
               searchField: "empName",
               searchWord: ""
             });
